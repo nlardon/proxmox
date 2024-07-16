@@ -21,8 +21,7 @@ VM_NAME=OpenWrt
 VM_ID=$(pvesh get /cluster/nextid)
 RAM=512
 CORES=1
-BRIDGE0=vmbr0
-BRIDGE1=vmbr1
+BRIDGE=vmbr0
 IMAGE=openwrt-23.05.3-x86-64-generic-ext4-combined.img
 
 qm create --name $VM_NAME \
@@ -31,12 +30,11 @@ qm create --name $VM_NAME \
   --net0 virtio,bridge=$BRIDGE \
   --scsihw virtio-scsi-pci --numa 1
   
-STORAGE=local
+STORAGE=local-lvm
 
 qm importdisk $VM_ID $IMAGE $STORAGE
 
 qm set $VM_ID --scsihw virtio-scsi-pci --virtio0 $STORAGE:$VM_ID/vm-$VM_ID-disk-0.raw
 
-qm set $VM_ID --serial0 socket --vga serial0
 qm set $VM_ID --boot c --bootdisk virtio0
 qm set $VM_ID --onboot 1
