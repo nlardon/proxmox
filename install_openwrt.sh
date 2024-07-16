@@ -21,8 +21,9 @@ VM_NAME=OpenWrt
 VM_ID=$(pvesh get /cluster/nextid)
 RAM=512
 CORES=1
-BRIDGE=vmbr0
-IMAGE=./openwrt-23.05.3-x86-64-generic-ext4-combined.img
+BRIDGE0=vmbr0
+BRIDGE1=vmbr1
+IMAGE=openwrt-23.05.3-x86-64-generic-ext4-combined.img
 
 qm create --name $VM_NAME \
   $VM_ID --memory $RAM \
